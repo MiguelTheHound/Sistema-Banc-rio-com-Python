@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Sistema Bancário</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+
+  <body>
+    <h1>💳 Sistema Bancário</h1>
+
+    <div class="container">
+      <h2>Depósito</h2>
+      <input type="number" id="deposito" />
+      <button onclick="depositar()">Depositar</button>
+
+      <h2>Levantamento</h2>
+      <input type="number" id="saque" />
+      <button onclick="sacar()">Sacar</button>
+
+      <h2>Extrato</h2>
+      <input type="text" id="idConta" placeholder="ID do usuário" />
+      <button onclick="mostrarExtrato()">Ver Extrato</button>
+      <button onclick="mostrarCriarUsuario()">Novo Usuário?</button>
+
+      <div id="area-usuario" style="display: none">
+        <h2>Novo Usuário</h2>
+        <input id="nome" placeholder="Nome" />
+        <input id="id" placeholder="ID" />
+        <input id="nascimento" placeholder="Data nascimento" />
+        <input id="endereco" placeholder="Endereço" />
+        <button onclick="criarUsuario()">Salvar Usuário</button>
+      </div>
+
+      <h2>Contas</h2>
+      <button onclick="listarContas()">Listar Contas</button>
+
+      <pre id="saida"></pre>
+    </div>
+
+    <script src="./js/index.js"></script>
+  </body>
+</html>
