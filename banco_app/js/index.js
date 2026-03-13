@@ -81,6 +81,42 @@ async function criarUsuario() {
   document.getElementById("area-usuario").style.display = "none";
 }
 
+// ... (mantenha as outras funções)
+
+// NOVA FUNÇÃO: Criar conta vinculada ao ID preenchido
+async function criarConta() {
+  const idUsuario = document.getElementById("id").value; // Pega o ID do campo de usuário
+
+  if (!idUsuario) {
+    mostrar("Erro: Preencha o campo ID antes de criar uma conta.");
+    return;
+  }
+
+  let resposta = await fetch(`${API_URL}/contas`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ id: idUsuario }),
+  });
+
+  let dados = await resposta.json();
+  mostrar(dados.mensagem);
+}
+
+// ATUALIZAÇÃO: Listar contas e também os usuários criados
+async function listarContas() {
+  // Busca contas
+  let respContas = await fetch(`${API_URL}/contas`);
+  let contas = await respContas.json();
+
+  let texto = "--- CONTAS ATIVAS ---\n";
+  contas.forEach((c) => {
+    texto += `Conta: ${c.numero} | Titular: ${c.titular}\n`;
+  });
+
+  // Mostra o resultado final
+  mostrar(texto || "Nenhuma conta ou usuário cadastrado.");
+}
+
 async function listarContas() {
   let resposta = await fetch(`${API_URL}/contas`);
   let contas = await resposta.json();

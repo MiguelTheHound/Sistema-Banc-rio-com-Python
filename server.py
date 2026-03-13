@@ -50,12 +50,16 @@ def criar_usuario():
 def gerenciar_contas():
     if request.method == "POST":
         id_usuario = request.json.get("id")
+        # Procura o usuário na lista
         usuario = next((u for u in dados_bancarios["usuarios"] if u["id"] == id_usuario), None)
+        
         if usuario:
             nova_conta = {"numero": len(dados_bancarios["contas"]) + 1, "titular": usuario["nome"]}
             dados_bancarios["contas"].append(nova_conta)
-            return jsonify({"mensagem": "Conta criada com sucesso!"})
-        return jsonify({"mensagem": "Usuário não encontrado"})
+            return jsonify({"mensagem": f"Conta criada para {usuario['nome']}!"})
+        return jsonify({"mensagem": "Usuário não encontrado. Crie o usuário primeiro!"}), 404
+        
+    # Se for GET, retorna a lista de contas
     return jsonify(dados_bancarios["contas"])
 
 if __name__ == "__main__":
